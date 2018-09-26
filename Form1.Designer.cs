@@ -1,6 +1,6 @@
 ﻿namespace PInvoke
 {
-    partial class Form1
+    partial class WIN32API
     {
         /// <summary>
         /// Required designer variable.
@@ -149,6 +149,7 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "19:00";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -165,7 +166,7 @@
             // 
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.label6.ForeColor = System.Drawing.Color.Salmon;
             this.label6.Location = new System.Drawing.Point(449, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 107);
@@ -211,7 +212,7 @@
             this.MemoryLoadProgressBar.Tag = "Test";
             this.MemoryLoadProgressBar.Value = 50;
             // 
-            // Form1
+            // WIN32API
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,7 +232,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "WIN32API";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);

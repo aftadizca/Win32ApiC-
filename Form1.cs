@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PInvoke
 {
-    public partial class Form1 : Form
+    public partial class WIN32API : Form
     {
         int flashCounter = 0;
         MEMORYSTATUSEX memori = new MEMORYSTATUSEX();
@@ -43,7 +43,7 @@ namespace PInvoke
         }
 
 
-        public Form1()
+        public WIN32API()
         {
             InitializeComponent();
         }
@@ -110,6 +110,11 @@ namespace PInvoke
         }
 
         private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
