@@ -41,22 +41,28 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.batPB = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.Virtual = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.pageFile = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.TotalAvail = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.MemoryLoadProgressBar = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
+            this.label8 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.SlateGray;
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button1.Location = new System.Drawing.Point(12, 25);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 38);
+            this.button1.Size = new System.Drawing.Size(150, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "MESSAGEBOX API";
             this.button1.UseVisualStyleBackColor = false;
@@ -64,14 +70,14 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.SlateGray;
+            this.button2.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(12, 54);
+            this.button2.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.button2.Location = new System.Drawing.Point(12, 69);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(132, 38);
+            this.button2.Size = new System.Drawing.Size(150, 38);
             this.button2.TabIndex = 1;
             this.button2.Text = "FLASH WINDOW";
             this.button2.UseVisualStyleBackColor = false;
@@ -128,8 +134,12 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gray;
+            this.panel1.BackColor = System.Drawing.SystemColors.GrayText;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(175, 450);
             this.panel1.TabIndex = 13;
@@ -175,6 +185,28 @@
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Lime;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(183, 285);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(109, 23);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "BATTERY";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // batPB
+            // 
+            this.batPB.ForeColor = System.Drawing.Color.Lime;
+            this.batPB.Location = new System.Drawing.Point(299, 285);
+            this.batPB.Name = "batPB";
+            this.batPB.Size = new System.Drawing.Size(289, 23);
+            this.batPB.TabIndex = 22;
+            this.batPB.Value = 50;
+            // 
             // Virtual
             // 
             this.Virtual.ForeColor = System.Drawing.Color.CornflowerBlue;
@@ -212,12 +244,30 @@
             this.MemoryLoadProgressBar.Tag = "Test";
             this.MemoryLoadProgressBar.Value = 50;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Turquoise;
+            this.label8.Location = new System.Drawing.Point(17, 430);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(135, 16);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "AFTA DIZCA WAHANA";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // WIN32API
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(600, 450);
+            this.Controls.Add(this.batPB);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Virtual);
             this.Controls.Add(this.pageFile);
@@ -228,14 +278,14 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "WIN32API";
-            this.Text = "Form1";
+            this.Text = "WIN32 API";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -258,6 +308,10 @@
         private QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx pageFile;
         private QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx Virtual;
         private System.Windows.Forms.Label label6;
+        private QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx batPB;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

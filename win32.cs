@@ -8,6 +8,17 @@ using System.Windows.Forms;
 
 namespace PInvoke
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public class SYSTEM_POWER_STATUS
+    {
+        public byte ACLineStatus;
+        public byte BatteryFlag;
+        public byte BatteryLifePercent;
+        public byte SystemStatusFlag;
+        public int BatteryLifeTime;
+        public int BatteryFullLifeTime;
+    }
+
     // Untuk menampung data MEMORY STATUS
     [StructLayout(LayoutKind.Sequential)]
     public class MEMORYSTATUSEX
@@ -33,13 +44,19 @@ namespace PInvoke
         
         [DllImport("User32.dll")]
         public static extern int MessageBox(IntPtr hwnd, String text, String title, MessageBoxButtons type);
+
         [DllImport("user32.dll")]
         public static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
+
         [DllImport("kernel32.dll")]
         public static extern void Sleep(uint dwMilliseconds);
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool GlobalMemoryStatusEx(MEMORYSTATUSEX lpBuffer);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("Kernel32.dll")]
+        public static extern bool GetSystemPowerStatus(SYSTEM_POWER_STATUS lpSystemPowerStatus);
     }
 }

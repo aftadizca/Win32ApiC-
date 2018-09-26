@@ -14,12 +14,28 @@ namespace PInvoke
     {
         int flashCounter = 0;
         MEMORYSTATUSEX memori = new MEMORYSTATUSEX();
+        SYSTEM_POWER_STATUS bat = new SYSTEM_POWER_STATUS();
+
 
         //Add text in progressbar memori used
         public void pBMemoryLoad(uint value)
         {
             MemoryLoadProgressBar.Tag = value.ToString() + "%";
             MemoryLoadProgressBar.Value = (int)value;          
+        }
+
+        public void pBbat(int value, byte flag)
+        {
+            if(flag == 1)
+            {
+                batPB.Tag = value + "% - Charging";
+            }
+            else
+            {
+                batPB.Tag = value + "% - Unplugged";
+            }
+            
+            batPB.Value = value;
         }
 
         public void pBTotalAvail(ulong ullTotalPhys, ulong ullAvailPhys)
@@ -43,6 +59,8 @@ namespace PInvoke
         }
 
 
+
+
         public WIN32API()
         {
             InitializeComponent();
@@ -51,6 +69,8 @@ namespace PInvoke
         private void Form1_Load(object sender, EventArgs e)
         {
             timerClock.Start();
+            TimerFlash.Start();
+            timerMemory.Start();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -70,8 +90,7 @@ namespace PInvoke
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-                TimerFlash.Start();
-                timerMemory.Start();
+                
         }
 
         private void TimerFlash_Tick(object sender, EventArgs e)
@@ -91,6 +110,8 @@ namespace PInvoke
         private void timerMemory_Tick(object sender, EventArgs e)
         {
             Win32Api.GlobalMemoryStatusEx(memori);
+            Win32Api.GetSystemPowerStatus(bat);
+            pBbat(bat.BatteryLifePercent, bat.ACLineStatus);
             pBMemoryLoad(memori.dwMemoryLoad);
             pBTotalAvail(memori.ullTotalPhys/1024/1024, memori.ullAvailPhys / 1024 / 1024);
             pBPageFile((memori.ullTotalPageFile) / 1024 / 1024, (memori.ullAvailPageFile) / 1024 / 1024);
@@ -117,6 +138,17 @@ namespace PInvoke
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
