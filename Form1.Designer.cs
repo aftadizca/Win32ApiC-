@@ -37,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.timerClock = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.pageFile = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.TotalAvail = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
             this.MemoryLoadProgressBar = new QuantumConcepts.Common.Forms.UI.Controls.ProgressBarEx();
-            this.label8 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -144,6 +144,18 @@
             this.panel1.Size = new System.Drawing.Size(175, 450);
             this.panel1.TabIndex = 13;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Turquoise;
+            this.label8.Location = new System.Drawing.Point(17, 430);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(135, 16);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "AFTA DIZCA WAHANA";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
             // timerClock
             // 
             this.timerClock.Interval = 1000;
@@ -205,6 +217,7 @@
             this.batPB.Name = "batPB";
             this.batPB.Size = new System.Drawing.Size(289, 23);
             this.batPB.TabIndex = 22;
+            this.batPB.Tag = "coba";
             this.batPB.Value = 50;
             // 
             // Virtual
@@ -243,18 +256,6 @@
             this.MemoryLoadProgressBar.TabIndex = 16;
             this.MemoryLoadProgressBar.Tag = "Test";
             this.MemoryLoadProgressBar.Value = 50;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Turquoise;
-            this.label8.Location = new System.Drawing.Point(17, 430);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(135, 16);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "AFTA DIZCA WAHANA";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // timer1
             // 
