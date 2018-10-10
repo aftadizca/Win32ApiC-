@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Shell32;
 using System.Windows.Forms;
 
 namespace FileExplorer
@@ -12,6 +13,8 @@ namespace FileExplorer
         private string _fileSelectedName;
         private const char PathSeparator = '\\';
 		private static SHFILEOPSTRUCT _shFile;
+        private static Shell _shl;
+        private const long SsfBitbucket = 10;
         private static List<UndoAction> _undoActions = new List<UndoAction>();
 
         private class ContextMenuIndex
@@ -56,6 +59,9 @@ namespace FileExplorer
                     case "Move":
                         MoveFile(_toPath,_fromPath,false);
                         break;
+                    case "Delete":
+                        RestoreFromRecycleBin(_fromPath);
+                        break;
                 }
             }
         }
@@ -79,7 +85,10 @@ namespace FileExplorer
 
             
         }
-
+        /// <summary>
+        /// Set Image for Node TreeView based on file/folder type
+        /// </summary>
+        /// <param name="e">Tree Node</param>
         private void ImageIndexChanger(TreeNode e)
 		{
            
@@ -115,6 +124,7 @@ namespace FileExplorer
             FileOperation.SHFileOperation(ref _shFile);
             _undoActions.Add(new UndoAction(from,to,"Copy"));
 		}
+
         private static void MoveFile(string from, string to,bool undo)
         {
             _shFile = new SHFILEOPSTRUCT
@@ -135,7 +145,11 @@ namespace FileExplorer
                 _undoActions.Add(new UndoAction(from, to, "Move")); 
             }
         }
-
+        /// <summary>
+        /// Delete File
+        /// </summary>
+        /// <param name="from">lokasi asal file</param>
+        /// <param name="permanent">true jika delete permanen</param>
         private static void DeleteFile(string from, bool permanent)
 		{
             _shFile = new SHFILEOPSTRUCT
@@ -152,17 +166,52 @@ namespace FileExplorer
 		    if (permanent)
 		    {
 		        _shFile.fFlags = FILEOP_FLAGS.FOF_NOCONFIRMATION;
-		    }
+            }
+		    else
+		    {
+		        _undoActions.Add(new UndoAction(from, "", "Delete"));
+            }
 
             FileOperation.SHFileOperation(ref _shFile);
 		}
 
-		/// <summary>
-		/// Gets list of folder
-		/// </summary>
-		/// <param name="path">Path to the folder</param>
-		/// <returns>List nama folder</returns>
-		private List<string> FolderList(string path)
+        private static void RestoreFromRecycleBin(string pathItem)
+        {
+            _shl = new Shell();
+            Folder recycler = _shl.NameSpace(SsfBitbucket);
+            for (int i = 0; i < recycler.Items().Count; i++)
+            {
+                FolderItem fi = recycler.Items().Item(i);
+                var fileName = recycler.GetDetailsOf(fi, 0);
+                if (Path.GetExtension(fileName) == "") fileName += Path.GetExtension(fi.Path);
+                //Necessary for systems with hidden file extensions.
+                string filePath = recycler.GetDetailsOf(fi, 1);
+                if (pathItem == Path.Combine(filePath, fileName))
+                {
+                    DoVerb(fi, @"ESTORE");
+                    return;
+                }
+            }
+        }
+
+        private static void DoVerb(FolderItem item, string verb)
+        {
+            foreach (FolderItemVerb fiVerb in item.Verbs())
+            {
+                if (fiVerb.Name.ToUpper().Contains(verb.ToUpper()))
+                {
+                    fiVerb.DoIt();
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets list of folder
+        /// </summary>
+        /// <param name="path">Path to the folder</param>
+        /// <returns>List nama folder</returns>
+        private List<string> FolderList(string path)
         {
 			List<string> list = new List<string>();
 			try
@@ -302,6 +351,7 @@ namespace FileExplorer
             contextMenuStrip1.Items[ContextMenuIndex.delete].Enabled = false;
             contextMenuStrip1.Items[ContextMenuIndex.move].Enabled = false;
             contextMenuStrip1.Items[ContextMenuIndex.undo].Enabled = false;
+
         }
 		private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
@@ -383,6 +433,8 @@ namespace FileExplorer
                 var filePath = listView1.SelectedItems[0].Name;
                 DeleteFile(filePath,false);
                 PopulateListView(currentFolder.Text);
+                contextMenuStrip1.Items[ContextMenuIndex.undo].Enabled = true;
+                contextMenuStrip1.Items[ContextMenuIndex.undo].Text = $@"Undo {_undoActions[_undoActions.Count - 1].GetAction()}";
             }
 		}
 
