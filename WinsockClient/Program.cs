@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PInvoke
+namespace WinsockClient
 {
     static class Program
     {
@@ -13,7 +16,7 @@ namespace PInvoke
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WIN32API());
+            Application.Run(new FormClient());
         }
     }
 }

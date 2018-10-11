@@ -66,8 +66,6 @@ namespace FileExplorer
             }
         }
 
-
-
         private string RenameOnCollision(string path,int count)
         {
             count++;
@@ -359,7 +357,6 @@ namespace FileExplorer
 		        var fullpaths = e.Node.FullPath;
 		        PopulateTreeView(fullpaths);
 		    }
-
 		    ImageIndexChanger(e.Node);
 		}
 
