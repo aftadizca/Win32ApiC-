@@ -69,7 +69,10 @@ namespace WinsockClient
 
             data = (string) dat;
 
-            formatText(richTextBox1,"Server : "+data,Color.Black, FontStyle.Regular,true);
+            if (data != "")
+            {
+                formatText(richTextBox1, "Server : " + data, Color.Black, FontStyle.Regular, true); 
+            }
 
         }
 
